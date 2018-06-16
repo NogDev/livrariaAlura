@@ -28,13 +28,17 @@
 					label="Preço">
 					<f:validateDoubleRange minimum="1.0" maximum="1000.00" />
 				</h:inputText>
-				<h:outputLabel value="Data de Lançamento:" for="dataLancamento" />
+				
+				<h:outputText value="#{livro.dataLancamento.time}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+						timeZone="America/Sao_Paulo" />
+				</h:outputText>
 				<h:inputText id="dataLancamento"
 					value="#{livroBean.livro.dataLancamento.time}">
-					<f:convertDateTime pattern="dd/MM/yyyy"
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
 						timeZone="America/Sao_Paulo" />
 				</h:inputText>
-
+				
 			</h:panelGrid>
 		</fieldset>
 
