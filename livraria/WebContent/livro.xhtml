@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
-	
-<h:head/>
+
+<h:head />
 
 <h:body>
 	<h1>Novo Livro</h1>
@@ -23,8 +23,9 @@
 
 				<h:outputLabel value="ISBN:" for="isbn" />
 				<h:inputText id="isbn" value="#{livroBean.livro.isbn}"
-					validator="#{livroBean.comecaComDigitoUm}" />
-
+					validator="#{livroBean.comecaComDigitoUm}">
+					<f:ajax event="keyup" render="messages" />
+				</h:inputText>
 				<h:outputLabel value="Preço:" for="preco" />
 				<h:inputText id="preco" value="#{livroBean.livro.preco}"
 					label="Preço">
@@ -49,14 +50,15 @@
 			<h:outputLabel value="Selecione Autor: " for="autor" />
 			<h:selectOneMenu value="#{livroBean.autorId}" id="autor">
 				<f:selectItems value="#{livroBean.autores}" var="autor"
-					itemLabel="#{autor.nome}" itemValue="#{autor.id}"/>
+					itemLabel="#{autor.nome}" itemValue="#{autor.id}" />
 			</h:selectOneMenu>
 			<h:commandButton value="Gravar Autor"
-				action="#{livroBean.gravarAutor}" >
-					<f:ajax execute="autor" render="tabelaAutores"/>
-				</h:commandButton>
+				action="#{livroBean.gravarAutor}">
+				<f:ajax execute="autor" render="tabelaAutores" />
+			</h:commandButton>
 
-			<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor" id="tabelaAutores">
+			<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor"
+				id="tabelaAutores">
 				<h:column>
 					<h:outputText value="#{autor.nome}" />
 				</h:column>
@@ -66,9 +68,9 @@
 		</fieldset>
 
 		<h:commandButton value="Gravar" action="#{livroBean.gravar}">
-		
-			<f:ajax execute="@form" render="@form :tabelaLivros"/>
-		
+
+			<f:ajax execute="@form" render="@form :tabelaLivros" />
+
 		</h:commandButton>
 	</h:form>
 
