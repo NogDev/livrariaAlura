@@ -67,5 +67,9 @@ public class LivroBean {
 		}
 		
 	}
+	
+	public List<Livro> getLivros() {
+        return new DAO<Livro>(Livro.class).listaTodos();
+    }
 
 }
