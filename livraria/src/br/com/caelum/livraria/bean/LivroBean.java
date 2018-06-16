@@ -1,6 +1,7 @@
 package br.com.caelum.livraria.bean;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -16,7 +17,9 @@ import br.com.caelum.livraria.modelo.Livro;
 
 @ManagedBean
 @ViewScoped
-public class LivroBean {
+public class LivroBean implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	private Livro livro = new Livro();
 	
@@ -57,6 +60,11 @@ public class LivroBean {
 		}
 
 		new DAO<Livro>(Livro.class).adiciona(this.livro);
+	}
+	
+	public void remover(Livro livro){
+		System.out.println("Removendo livro");
+		new DAO<Livro>(Livro.class).remove(livro);
 	}
 	
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException{
