@@ -76,6 +76,11 @@ public class LivroBean implements Serializable{
 		new DAO<Livro>(Livro.class).remove(livro);
 	}
 	
+	public void removerAutorDoLivro(Autor autor){
+		//this.livro.getAutores().remove(autor);
+		this.livro.removeAutor(autor);
+	}
+	
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException{
 		
 		String valor = value.toString();
