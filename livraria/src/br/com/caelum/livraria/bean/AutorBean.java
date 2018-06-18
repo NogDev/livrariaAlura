@@ -16,6 +16,24 @@ public class AutorBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Autor autor = new Autor();
+	
+	private Integer autorId;
+
+	public Integer getAutorId() {
+		return autorId;
+	}
+
+	public void setAutorId(Integer autorId) {
+		this.autorId = autorId;
+	}
+	
+	public void carregarAutorPelaId(){
+		this.autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
 
 	public Autor getAutor() {
 		return autor;
@@ -47,4 +65,6 @@ public class AutorBean implements Serializable{
 		System.out.println("Removendo Autor");
 		new DAO<Autor>(Autor.class).remove(autor);//não entendo pq não utiliza o this
 	}
+	
+	
 }
