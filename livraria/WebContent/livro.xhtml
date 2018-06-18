@@ -104,6 +104,12 @@
 					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
 				</h:outputText>
 			</h:column>
+			
+			<h:column>
+				<f:facet name="header">Alterar</f:facet>
+				<h:commandLink value="altera" action="#{livroBean.carregar(livro)}"/>
+			</h:column>
+			
 			<h:column>
 				<f:facet name="header">Remover</f:facet>
 				<h:commandLink value="remove" action="#{livroBean.remover(livro)}"/>

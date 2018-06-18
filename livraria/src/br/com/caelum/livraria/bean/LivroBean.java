@@ -58,8 +58,17 @@ public class LivroBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor."));
 			return;
 		}
+		if (this.livro.getId() == null) {
+			new DAO<Livro>(Livro.class).adiciona(this.livro);
+		}else{
+			new DAO<Livro>(Livro.class).atualiza(this.livro);
+		}
 
-		new DAO<Livro>(Livro.class).adiciona(this.livro);
+	}
+	
+	public void carregar(Livro livro){
+		System.out.println("Carregando o livro");
+		this.livro = livro; // carrega os campos do formulário com os dados do item selecionado
 	}
 	
 	public void remover(Livro livro){
