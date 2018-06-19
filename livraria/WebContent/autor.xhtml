@@ -18,12 +18,24 @@
 		Novo Autor
 	</ui:define>
 	<ui:define name="conteudo">
-		<h:form>
+		<h:form id="autor">
 			<fieldset>
 				<legend>Dados do Autor</legend>
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="3">
 					<h:outputLabel value="Nome:" for="nome" />
 					<h:inputText id="nome" value="#{autorBean.autor.nome}" />
+					<h:message for="nome" id="nomeMessage"/>
+					
+					
+					<h:outputLabel value="Email:" for="email" />
+					<h:inputText id="email" value="#{autorBean.autor.email}" required="true" >
+						<f:passThroughAttribute name="type" value="email"/>
+					</h:inputText>
+					<h:message for="email" id="emailMessage"/>
+					
+					
+					
+					
 					<h:commandButton value="Gravar" action="#{autorBean.gravar}">
 						<f:ajax execute="@form"
 							render="@form :formTabelaAutores:tabelaAutores" />
