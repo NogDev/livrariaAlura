@@ -7,6 +7,12 @@
 
 
 <ui:composition template="_template.xhtml">
+
+<f:metadata>
+    <f:viewParam name="livroId" value="#{livroBean.livroId}"/>
+    <f:viewAction action="#{livroBean.carregaPelaId}" if="#{param['livroId'] != null}"/>
+</f:metadata>
+
 	<ui:define name="titulo">
 		Novo Livro
 	</ui:define>
