@@ -1,5 +1,6 @@
 package br.com.caelum.livraria.bean;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -31,8 +32,15 @@ public class LoginBean {
 
             return "livro?faces-redirect=true";
         }
-
-        return null;
+        
+        // mantem as menssagens de validação entre requisições
+        context.getExternalContext().getFlash().setKeepMessages(true);
+        
+        
+        // para um componete expecífico
+        //context.addMessage("login:email", new FacesMessage("Usuário não encontrado"));
+        context.addMessage(null, new FacesMessage("Usuário não encontrado"));
+    	return "login?faces-redirect=true";
     }
     
     public String deslogar(){
