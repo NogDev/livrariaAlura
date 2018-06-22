@@ -8,6 +8,7 @@
     
     <lifecycle>
     	<phase-listener>br.caelum.livraria.util.LogPhaseListener</phase-listener>
+    	<phase-listener>br.caelum.livraria.util.Autorizador</phase-listener>
     </lifecycle>
 
 </faces-config>
