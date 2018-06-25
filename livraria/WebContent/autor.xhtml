@@ -17,7 +17,8 @@
 
 
 	<ui:define name="titulo">
-      <p:outputPanel>Novo Autor</p:outputPanel>	</ui:define>
+		<p:outputPanel>Novo Autor</p:outputPanel>
+	</ui:define>
 	<ui:define name="conteudo">
 		<h:form id="autor">
 			<p:fieldset legend="Dados do Autor">
@@ -36,38 +37,38 @@
 					<p:inputText id="email" value="#{autorBean.autor.email}"
 						required="true" validatorMessage="Email inválido">
 						<f:attribute name="type" value="email" />
-						<f:passThroughAttribute name="placeholder" value="Email do Autor"/>
-						<f:validateRegex pattern=".+@.+"/>
+						<f:passThroughAttribute name="placeholder" value="Email do Autor" />
+						<f:validateRegex pattern=".+@.+" />
 						<f:ajax event="blur" render="messageEmail" />
-						
+
 					</p:inputText>
 
 					<p:message for="email" id="messageEmail" />
 
-					<p:commandButton value="Gravar" action="#{autorBean.gravar}" process="@form" update="@form :formTabelaAutores"/>
+					<p:commandButton value="Gravar" action="#{autorBean.gravar}"
+						process="@form" update="@form :formTabelaAutores" />
 				</h:panelGrid>
 			</p:fieldset>
 		</h:form>
 
 		<h:form id="formTabelaAutores">
-			<h:dataTable id="tabelaAutores" value="#{autorBean.autores}"
-				var="autor">
-				<h:column>
-					<f:facet name="header">Titulo</f:facet>
-					<h:outputText value="#{autor.nome}" />
-				</h:column>
 
-				<h:column>
-					<f:facet name="header">Alterar</f:facet>
-					<h:commandLink value="altera" action="#{autorBean.carregar(autor)}" />
-				</h:column>
+			<p:dataList value="#{autorBean.autores}" var="autor"
+				type="definition">
 
-				<h:column>
-					<f:facet name="header">Remover</f:facet>
-					<h:commandLink value="remove" action="#{autorBean.remover(autor)}" />
-				</h:column>
+				<f:facet name="header">
+		            AUTORES
+		        </f:facet>
+				<p:commandLink styleClass="ui-icon ui-icon-pencil"
+					style="float:left;margin-right:10px"
+					action="#{autorBean.carregar(autor)}" update=":autor" />
+				<p:commandLink styleClass="ui-icon ui-icon-trash"
+					style="float:left;margin-right:10px"
+					action="#{autorBean.remover(autor)}" update="@form" />
+		        
+		        	#{autor.nome} - #{autor.email}
+		    </p:dataList>
 
-			</h:dataTable>
 		</h:form>
 	</ui:define>
 	<ui:define name="texto">
