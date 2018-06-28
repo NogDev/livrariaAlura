@@ -32,6 +32,12 @@
 						<f:validateLength maximum="20" />
 					</p:inputText>
 
+					<p:outputLabel value="Gênero:" for="genero" />
+					<p:selectOneMenu value="#{livroBean.livro.genero}" id="genero">
+						<f:selectItem itemLabel="Selecione..." itemValue="#{null}" />
+						<f:selectItems value="#{livroBean.generos}" />
+					</p:selectOneMenu>
+
 					<p:outputLabel value="ISBN:" for="isbn" />
 					<p:inputMask id="isbn" value="#{livroBean.livro.isbn}"
 						validator="#{livroBean.comecaComDigitoUm}" mask="999-9-99-99999-9" />
@@ -94,11 +100,24 @@
 					filterBy="#{livro.titulo}" filterMatchMode="startsWith">
 					<h:outputText value="#{livro.titulo}" />
 				</p:column>
+
+				<p:column headerText="Gênero" sortBy="#{livro.genero}"
+					filterBy="#{livro.genero}" filterMatchMode="startsWith">
+					<f:facet name="filter">
+						<p:selectOneMenu onchange="PF('tabelaLivros').filter()">
+							<f:selectItem itemLabel="Selecione..." itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{livroBean.generos}" />
+						</p:selectOneMenu>
+					</f:facet>
+					<h:outputText value="#{livro.genero}" />
+				</p:column>
+
 				<p:column headerText="ISBN" sortBy="#{livro.isbn}"
 					filterBy="#{livro.isbn}" filterMatchMode="contains">
 					<h:outputText value="#{livro.isbn}" />
 				</p:column>
-				
+
 				<p:column headerText="Preço" sortBy="#{livro.preco}"
 					filterBy="#{livro.preco}"
 					filterFunction="#{livroBean.precoEhMenor}">
@@ -107,7 +126,7 @@
 							currencySymbol="R$" locale="pt_BR" />
 					</h:outputText>
 				</p:column>
-				
+
 				<p:column headerText="Data" sortBy="#{livro.dataLancamento.time}"
 					filterBy="#{livro.dataLancamento.time}" filterMatchMode="contains">
 					<h:outputText value="#{livro.dataLancamento.time}">

@@ -2,6 +2,7 @@ package br.com.caelum.livraria.bean;
 
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,6 +29,12 @@ public class LivroBean implements Serializable{
 	private Integer livroId;
 	
 	private LivroDataModel livroDataModel = new LivroDataModel();
+	
+	private List<String> generos = Arrays.asList("Romance", "Drama", "Ação");
+
+	public List<String> getGeneros() {
+	    return generos;
+	}
 
 	public Integer getLivroId() {
 	        return livroId;
