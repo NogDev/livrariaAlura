@@ -13,9 +13,37 @@
 		<h:form id="ringForm">
 			<p:ring id="basic" value="#{livroBean.livros}" var="livro">
 				<p:outputPanel style="text-align: center;" layout="block">
-        #{livro.titulo}
-    </p:outputPanel>
+      					  #{livro.titulo}
+    			</p:outputPanel>
 			</p:ring>
+
+			<p:dialog id="livroDialog" header="Informações do Livro"
+				widgetVar="livroDialog" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false" width="300">
+				<p:outputPanel id="livroDetail" style="text-align:center"
+					layout="block">
+					<p:panelGrid columns="2" rendered="#{not empty livroBean.livro}"
+						columnClasses="value" style="width:100%;">
+						<f:facet name="header">
+              				  #{livroBean.livro.titulo} 
+              				  
+              				  <br />
+							<p:commandButton update=":ringForm:livroDetail"
+								icon="ui-icon-search" title="View"
+								oncomplete="PF('livroDialog').show();">
+								<f:setPropertyActionListener value="#{livro}"
+									target="#{livroBean.livro}" />
+							</p:commandButton>
+						</f:facet>
+
+						<h:outputText value="Preço" />
+						<h:outputText value="#{livroBean.livro.preco}" />
+
+						<h:outputText value="ISBN" />
+						<h:outputText value="#{livroBean.livro.isbn}" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
 
 
 		</h:form>
