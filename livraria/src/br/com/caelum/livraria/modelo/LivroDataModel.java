@@ -19,6 +19,8 @@ public class LivroDataModel extends LazyDataModel<Livro> {
 	
 	@Override
 	public List<Livro> load(int inicio, int quantidade, String campoOrdenacao, SortOrder sentidoOrdenacao, Map<String, Object> filtros) {
-	    return dao.listaTodosPaginada(inicio, quantidade);
+	    String titulo = (String) filtros.get("titulo");
+
+	    return dao.listaTodosPaginada(inicio, quantidade, "titulo", titulo);
 	}
 }
