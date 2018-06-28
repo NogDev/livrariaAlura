@@ -68,21 +68,26 @@ public class LivroBean implements Serializable{
 	}
 
 	public void gravar() {
-		System.out.println("Gravando livro " + this.livro.getTitulo());
+	    System.out.println("Gravando livro " + this.livro.getTitulo());
 
-		if (livro.getAutores().isEmpty()) {
-			//throw new RuntimeException("Livro deve ter pelo menos um Autor.");
-			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor."));
-			return;
-		}
-		DAO<Livro> dao = new DAO<Livro>(Livro.class);
-		if (this.livro.getId() == null) {
-			dao.adiciona(this.livro);
-			this.livros = dao.listaTodos();//carregar livros na lista
-		}else{
-			new DAO<Livro>(Livro.class).atualiza(this.livro);
-		}
+	    if (livro.getAutores().isEmpty()) {
+	        FacesContext.getCurrentInstance().addMessage("autor",
+	                new FacesMessage("Livro deve ter pelo menos um Autor."));
+	        return;
+	    }
 
+	    DAO<Livro> dao = new DAO<Livro>(Livro.class);
+
+	    if(this.livro.getId() == null) {
+	        dao.adiciona(this.livro);
+
+	        // Novo livro adicionado, listamos todos os livros novamente
+	        this.livros = dao.listaTodos();
+	    } else {
+	        dao.atualiza(this.livro);
+	    }
+
+	    this.livro = new Livro();
 	}
 	
 	public void carregar(Livro livro){
@@ -92,7 +97,9 @@ public class LivroBean implements Serializable{
 	
 	public void remover(Livro livro){
 		System.out.println("Removendo livro");
-		new DAO<Livro>(Livro.class).remove(livro);
+		DAO<Livro> dao = new DAO<Livro>(Livro.class);
+		dao.remove(livro);
+		this.livros = dao.listaTodos();
 	}
 	
 	public void removerAutorDoLivro(Autor autor){

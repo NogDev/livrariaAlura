@@ -85,7 +85,8 @@
 		<h:form id="formTabelaLivros">
 		<p:dataTable value="#{livroBean.livros}" var="livro" id="tabelaLivros" rows="5" paginator="true">
 			<f:facet name="header">Livros</f:facet>
-			<p:column headerText="Título" sortBy="#{livro.titulo}">
+			<p:column headerText="Título" sortBy="#{livro.titulo}" filterBy="#{livro.titulo}" 
+			filterMatchMode="startsWith">
 				<h:outputText value="#{livro.titulo}" />
 			</p:column>
 			<p:column sortBy="#{livro.isbn}">
