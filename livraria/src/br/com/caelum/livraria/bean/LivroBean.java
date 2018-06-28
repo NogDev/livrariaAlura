@@ -40,6 +40,8 @@ public class LivroBean implements Serializable{
 	
 	private Integer autorId;
 
+	private List<Livro> livros;
+
 	public Integer getAutorId() {
 		return autorId;
 	}
@@ -106,7 +108,11 @@ public class LivroBean implements Serializable{
 	}
 	
 	public List<Livro> getLivros() {
-        return new DAO<Livro>(Livro.class).listaTodos();
+        DAO<Livro> dao = new DAO<Livro>(Livro.class);
+        if(this.livros ==null){
+		this.livros = dao.listaTodos();
+        }
+		return livros;
     }
 	
 	public String formAutor(){
