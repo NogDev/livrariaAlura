@@ -10,22 +10,23 @@
 <h:body>
 	<div id="cabecalho">
 		<h:graphicImage library="img" name="logo.png" />
-			<p:growl id="messages" showDetail="true" autoUpdate="true"/>
+		<p:growl id="messages" showDetail="true" autoUpdate="true"/>
 
 		<h:form rendered="#{usuarioLogado !=null}">
 
 			<p:menuButton value="Menu">
-				<p:menuitem value="Livros" action="livro"
-				icon="ui-icon-disk" />
-				<p:menuitem value="Autores" action="autor"
-				 icon="ui-icon-arrowrefresh-1-w" />
+				<p:menuitem value="Livros" action="livro?faces-redirect=true"
+					icon="fa fa-fw fa-edit" />
+				<p:menuitem value="Autores" action="autor?faces-redirect=true"
+					icon="fa fa-fw fa-edit" />
+
 				<p:separator />
-				<p:menuitem value="Logout" action="#{loginBean.deslogar}"  
+				<p:menuitem value="Logout" action="#{loginBean.deslogar}"
 					icon="ui-icon-extlink" />
 			</p:menuButton>
 		</h:form>
 
-		
+
 		<h1>
 			<ui:insert name="titulo"></ui:insert>
 		</h1>
