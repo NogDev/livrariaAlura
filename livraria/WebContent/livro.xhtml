@@ -48,39 +48,38 @@
 				</p:panelGrid>
 			</p:fieldset>
 
-			<p:fieldset>
-				<legend>Dados do Autor</legend>
+			<p:fieldset legend="Dados do Autor">
+			
+			<p:panelGrid columns="4">
+				
 				<p:outputLabel value="Selecione Autor: " for="autor" />
-				<h:selectOneMenu value="#{livroBean.autorId}" id="autor">
+				<p:selectOneMenu value="#{livroBean.autorId}" id="autor">
 					<f:selectItems value="#{livroBean.autores}" var="autor"
 						itemLabel="#{autor.nome}" itemValue="#{autor.id}" />
-				</h:selectOneMenu>
-				<h:commandButton value="Gravar Autor"
-					action="#{livroBean.gravarAutor}">
-					<f:ajax execute="autor" render="tabelaAutores" />
-				</h:commandButton>
-				<br />
-				<h:commandLink value="Cadastrar novo autor"
-					action="#{livroBean.formAutor}" immediate="true" />
+				</p:selectOneMenu>
+				<p:commandButton value="Gravar Autor"
+					action="#{livroBean.gravarAutor}" process="@this autor" update="tabelaAutores">
+				</p:commandButton>
+				<p:commandLink value="ou cadastrar novo autor"
+					action="#{livroBean.formAutor}" immediate="true" 
+					update="@all"/>
+				</p:panelGrid>
 
-				<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor"
-					id="tabelaAutores">
-					<h:column>
-						<h:outputText value="#{autor.nome}" />
-					</h:column>
-					<h:column>
-						<h:commandLink value="X" action="#{livroBean.removerAutorDoLivro(autor)}"/>
-					</h:column>
-				</h:dataTable>
-
-
+				<p:dataTable value="#{livroBean.autoresDoLivro}" var="autor"
+					id="tabelaAutores" emptyMessage="Nenhum autor">
+					<p:column>
+						<h:outputText value="#{autor.nome}"/>
+					</p:column>
+					<p:column>
+						<p:commandLink value="X" action="#{livroBean.removerAutorDoLivro(autor)}" update="tabelaAutores" process="@this"/>
+					</p:column>
+				</p:dataTable>
 			</p:fieldset>
 
-			<h:commandButton value="Gravar" action="#{livroBean.gravar}">
+			<p:commandButton value="Gravar" action="#{livroBean.gravar}" 
+			process="@form" update="@form :formTabelaLivros:tabelaLivros"/>
 
-				<f:ajax execute="@form" render="@form :formTabelaLivros:tabelaLivros" />
 
-			</h:commandButton>
 		</h:form>
 		
 		<h:form id="formTabelaLivros">
