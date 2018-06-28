@@ -98,13 +98,16 @@
 					filterBy="#{livro.isbn}" filterMatchMode="contains">
 					<h:outputText value="#{livro.isbn}" />
 				</p:column>
-				<p:column sortBy="#{livro.isbn}">
-					<f:facet name="header">Preço</f:facet>
+				
+				<p:column headerText="Preço" sortBy="#{livro.preco}"
+					filterBy="#{livro.preco}"
+					filterFunction="#{livroBean.precoEhMenor}">
 					<h:outputText value="#{livro.preco}">
 						<f:convertNumber type="currency" pattern="R$ #0.00"
 							currencySymbol="R$" locale="pt_BR" />
 					</h:outputText>
 				</p:column>
+				
 				<p:column headerText="Data" sortBy="#{livro.dataLancamento.time}"
 					filterBy="#{livro.dataLancamento.time}" filterMatchMode="contains">
 					<h:outputText value="#{livro.dataLancamento.time}">
@@ -112,6 +115,7 @@
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
+
 
 				<p:column>
 					<f:facet name="header">Alterar</f:facet>
