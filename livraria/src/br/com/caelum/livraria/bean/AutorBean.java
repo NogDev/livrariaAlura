@@ -9,6 +9,7 @@ import javax.inject.Named;
 
 import br.com.caelum.livraria.dao.AutorDao;
 import br.com.caelum.livraria.modelo.Autor;
+import br.com.caelum.livraria.tx.Transactional;
 
 @Named
 @ViewScoped
@@ -43,7 +44,7 @@ public class AutorBean implements Serializable{
 	public Autor getAutor() {
 		return autor;
 	}
-
+	@Transactional
 	public void gravar() {
 		System.out.println("Gravando autor " + this.autor.getNome());
 		
@@ -66,6 +67,7 @@ public class AutorBean implements Serializable{
 		this.autor = autor; 
 	}
 	
+	@Transactional
 	public void remover(Autor autor){
 		System.out.println("Removendo Autor");
 		this.dao.remove(autor);//não entendo pq não utiliza o this

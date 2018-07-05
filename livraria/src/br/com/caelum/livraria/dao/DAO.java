@@ -21,39 +21,19 @@ public class DAO<T> implements Serializable{
 
 	public void adiciona(T t) {
 
-		// consegue a entity manager
-		
-
-		// abre transacao
-		em.getTransaction().begin();
-
-		// persiste o objeto
 		em.persist(t);
 
-		// commita a transacao
-		em.getTransaction().commit();
-
-		// fecha a entity manager
-		
 	}
 
 	public void remove(T t) {
-		
-		em.getTransaction().begin();
-
-		em.remove(em.merge(t));
-
-		em.getTransaction().commit();
+				em.remove(em.merge(t));
 		
 	}
 
 	public void atualiza(T t) {
+				em.merge(t);
+
 		
-		em.getTransaction().begin();
-
-		em.merge(t);
-
-		em.getTransaction().commit();
 		
 	}
 
@@ -78,10 +58,7 @@ public class DAO<T> implements Serializable{
 	public int contaTodos() {
 		
 		long result = (Long) em.createQuery("select count(n) from livro n")
-				.getSingleResult();
-		
-
-		return (int) result;
+				.getSingleResult();		return (int) result;
 	}
 
 	public List<T> listaTodosPaginada(int firstResult, int maxResults, String coluna, String valor) {
