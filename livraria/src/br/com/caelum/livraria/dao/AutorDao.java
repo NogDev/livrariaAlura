@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 
 import br.com.caelum.livraria.modelo.Autor;
 
-public class AutorDao implements Serializable{
+public class AutorDao implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -18,43 +18,29 @@ public class AutorDao implements Serializable{
 	
 	private DAO<Autor> dao;
 	
-	@PostConstruct 
+	@PostConstruct
 	void init() {
 		this.dao = new DAO<Autor>(this.em, Autor.class);
 	}
 
-	public void adiciona(Autor t) {
-		dao.adiciona(t);
+	public Autor buscaPorId(Integer autorId) {
+		return this.dao.buscaPorId(autorId);
 	}
 
-	public void remove(Autor t) {
-		dao.remove(t);
+	public void adiciona(Autor autor) {
+		this.dao.adiciona(autor);
 	}
 
-	public void atualiza(Autor t) {
-		dao.atualiza(t);
+	public void atualiza(Autor autor) {
+		this.dao.atualiza(autor);
+	}
+
+	public void remove(Autor autor) {
+		this.dao.remove(autor);
 	}
 
 	public List<Autor> listaTodos() {
-		return dao.listaTodos();
+		return this.dao.listaTodos();
 	}
 
-	public Autor buscaPorId(Integer id) {
-		return dao.buscaPorId(id);
-	}
-
-	public int contaTodos() {
-		return dao.contaTodos();
-	}
-
-	public List<Autor> listaTodosPaginada(int firstResult, int maxResults, String coluna, String valor) {
-		return dao.listaTodosPaginada(firstResult, maxResults, coluna, valor);
-	}
-
-	public int quantidadeDeElementos() {
-		return dao.quantidadeDeElementos();
-	}
-	
-
-	
 }

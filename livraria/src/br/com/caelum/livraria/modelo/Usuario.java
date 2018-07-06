@@ -9,36 +9,38 @@ import javax.persistence.Id;
 @Entity
 public class Usuario implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue
-    private Integer id;
-    private String email;
-    private String senha;
+	@Id
+	@GeneratedValue
+	private Integer id;
+	private String email;
+	private String senha;
+	
+	public String getEmail() {
+		return email;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+		public Integer getId() {
+		return id;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	
 
 }

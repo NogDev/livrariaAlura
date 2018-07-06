@@ -12,14 +12,14 @@ public class JPAUtil {
 	private static EntityManagerFactory emf = Persistence
 			.createEntityManagerFactory("livraria");
 
-	@Produces //metodo produtor de EntityManager
+	@Produces
 	@RequestScoped
 	public EntityManager getEntityManager() {
 		return emf.createEntityManager();
 	}
-	
-	
-	public void close(@Disposes EntityManager em) { //@Disposes informa que esse metodo será chamado ao final do escopo
+
+	public void close(@Disposes EntityManager em) {
 		em.close();
 	}
+
 }

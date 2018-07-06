@@ -8,27 +8,24 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 
-@Transactional
+@Transacional
 @Interceptor
-public class GerenciadorDeTransacao implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class GerenciadorDeTransacao implements Serializable {
+
 	@Inject
-	EntityManager em;
-	
+	EntityManager manager;
+
 	@AroundInvoke
-	public Object executaTX(InvocationContext context) throws Exception{
+	public Object executaTX(InvocationContext contexto) throws Exception {
+
+		manager.getTransaction().begin();
 		
-		// abre transacao
-		em.getTransaction().begin();
-		
-		
-		Object result = context.proceed();
-		
-		
-		
-		// commita a transacao
-		em.getTransaction().commit();
-		
-		return result;
+		// chamar os daos que precisam de um TX
+		Object resultado = contexto.proceed();
+
+		manager.getTransaction().commit();
+
+		return resultado;
 	}
+
 }
